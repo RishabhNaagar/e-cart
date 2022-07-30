@@ -6,30 +6,32 @@ passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
-  Customer.findById(id, function (err, user) {
+passport.deserializeUser(function (id, done){
+  Customer.findById(id, function (err, user){
     done(err, user);
   });
 });
 const customerCtrl={
-    // customerlog: function (req,res) {
-    //     const Customer = new customer({
-    //         username: req.body.username,
-    //         password: req.body.password,
-    //       });
-    //       //console.log("errors");
-    //       req.login(user, function (err) {
-    //         if (err) {
-    //           //console.log("error");
-    //           console.log(err);
-    //         } else {
-    //           passport.authenticate("local")(req, res, function () {
-    //             //res.redirect("/dashboard");
-    //             console.log("success");
-    //           });
-    //         }
-    //       });
-    // },
+    customerlogin: function(req,res){
+        console.log("wtdddd");
+        const customer = new Customer({
+            username: req.body.username,
+            password: req.body.password,
+        });
+        //console.log("errors");
+        req.login(customer, function (err) {
+            //console.log("wtf");
+            if (err) {
+              //console.log("error");
+                console.log(err);
+            } else {
+                passport.authenticate("local")(req, res, function (){
+                    console.log("gg11");
+                //res.redirect("/dashboard");
+                });
+            }
+        });
+    },
     customersignup: function(req,res){
         console.log("register");
         Customer.register(

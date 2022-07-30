@@ -9,7 +9,6 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
-const Customer = require("./models/customer.js");
 
 app.use(
   session({
@@ -21,17 +20,15 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-// Customer.plugin(passportLocalMongoose);
-// passport.use(Customer.createStrategy());
 
 const dbConnect = require("./db/db");
 dbConnect();
 
 const customer_route = require("./routes/customer");
 const shopkeeper_route = require("./routes/shopkeeper");
-//app.use("/api/v1", promotion_routes);
-app.use("/customer/", customer_route);
 
+app.use("/customer/", customer_route);
+app.use("/shopkeeper/", shopkeeper_route);
 
 app.get("/", function (req, res) {
   //res.render("indexPage");

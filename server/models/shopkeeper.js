@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-const ShopSchema = new mongoose.Schema({
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+
+const shopkeeperSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -19,13 +22,16 @@ const ShopSchema = new mongoose.Schema({
         default: "0",
     },
     state:{
-        type: Boolean,
+        type: String,
         default: false
     },
     city:{
-        type: Boolean,
+        type: String,
         default: false
     },
 },{ timestamps: true, versionKey: false});
 
-module.exports = mongoose.model("Shop", ShopSchema);
+shopkeeperSchema.plugin(passportLocalMongoose);
+const Shopkeeper = mongoose.model("shopkeeper", shopkeeperSchema);
+passport.use(Shopkeeper.createStrategy());
+module.exports  = Shopkeeper;
