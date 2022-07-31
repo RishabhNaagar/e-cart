@@ -4,29 +4,29 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 const shopkeeperSchema = new mongoose.Schema(
   {
-    name1: {
+    name: {
       type: String,
       required: true,
     },
-    username1: {
+    username: {
       type: String,
       required: true,
     },
-    email1: {
+    email: {
       type: String,
       required: true,
       unique: true,
     },
-    password1: {
+    password: {
       type: String,
       required: true,
       default: "0",
     },
-    state1: {
+    state: {
       type: String,
       default: false,
     },
-    city1: {
+    city: {
       type: String,
       default: false,
     },

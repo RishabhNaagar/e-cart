@@ -1,4 +1,5 @@
 const Shopkeeper = require("../models/customer.js");
+const Product = require("../models/product.js");
 const passport = require("passport");
 
 //passport.use(Customer.createStrategy());
@@ -14,34 +15,36 @@ passport.deserializeUser(function (id, done) {
 const shopkeeperCtrl = {
   shopkeeperlogin: function (req, res) {
     //console.log("wth");
-    console.log(req.body.username1);
+    // console.log(req.body.username1);
     const shopkeeper = new Shopkeeper({
-      username1: req.body.username1,
-      password1: req.body.password1,
+      username: req.body.username,
+      password: req.body.password,
     });
     //console.log("errors");
     req.login(shopkeeper, function (err) {
-      console.log("wtf");
+      // console.log("wtf");
       if (err) {
         //console.log("error");
         console.log(err);
       } else {
         passport.authenticate("local")(req, res, function () {
+          // console.log(req.user.id);
           console.log("gg");
-          //res.redirect("/dashboard");
+          //To render
+          res.redirect("/shopkeeper/ " + req.user.id + "/addproduct");
         });
       }
     });
   },
   shopkeepersignup: function (req, res) {
-    console.log("register1");
+    console.log(req.body);
     Shopkeeper.register(
       {
-        username1: req.body.username1,
-        name1: req.body.name1,
-        email1: req.body.email1,
-        state1: req.body.state1,
-        city1: req.body.city1,
+        username: req.body.username,
+        name: req.body.name,
+        email: req.body.email,
+        state: req.body.state,
+        city: req.body.city,
       },
       req.body.password,
       function (err, user) {
@@ -56,6 +59,17 @@ const shopkeeperCtrl = {
         }
       }
     );
+  },
+  addproduct: function (req, res) {
+    console.log(req.user);
+    // const pro = new Product({
+    //   by: req.body.by,
+    //   name: req.user.name,
+    //   type: req.body.type,
+    //   price: req.body.price,
+    // });
+    // pro.save();
+    console.log("Sup");
   },
 };
 
