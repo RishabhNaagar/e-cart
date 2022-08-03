@@ -61,14 +61,14 @@ const shopkeeperCtrl = {
     );
   },
   addproduct: function (req, res) {
-    console.log(req.user);
-    // const pro = new Product({
-    //   by: req.body.by,
-    //   name: req.user.name,
-    //   type: req.body.type,
-    //   price: req.body.price,
-    // });
-    // pro.save();
+    // console.log(req.user.id);
+    const pro = new Product({
+      name: req.body.name,
+      by: req.body.by,
+      type: req.body.type,
+      price: req.body.price,
+    });
+    pro.save();
     console.log("Sup");
   },
 };

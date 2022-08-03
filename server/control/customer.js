@@ -1,5 +1,6 @@
 const Customer = require("../models/customer.js");
 const passport = require("passport");
+const Product = require("../models/product.js");
 
 //passport.use(Customer.createStrategy());
 passport.serializeUser(function (user, done) {
@@ -55,6 +56,12 @@ const customerCtrl = {
         }
       }
     );
+  },
+  showpro: function (req, res) {
+    Product.find({ by: req.params.shop }, function (err, foundItem) {
+      // console.log();
+      console.log(foundItem);
+    });
   },
 };
 
