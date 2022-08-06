@@ -13,6 +13,9 @@ passport.deserializeUser(function (id, done) {
   });
 });
 const customerCtrl = {
+  check: function (req, res) {
+    res.render("index.ejs");
+  },
   customerlogin: function (req, res) {
     console.log("wtdddd");
     const customer = new Customer({
